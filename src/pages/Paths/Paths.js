@@ -28,7 +28,6 @@ const Paths = () => {
         data: Greeter.interface.encodeFunctionData('addGreet', []),
       },
     ],
-    totalValue: utils.parseEther('0.1'),
   });
 
   useEffect(() => {
