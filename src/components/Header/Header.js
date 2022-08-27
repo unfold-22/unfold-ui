@@ -1,4 +1,4 @@
-import { Box, Center, Flex } from '@chakra-ui/react';
+import { Box, Center, Flex, Image } from '@chakra-ui/react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Header = () => {
@@ -10,13 +10,20 @@ const Header = () => {
       boxShadow="0px 4px 14px 0px rgba(0, 0, 0, 0.1)"
     >
       <Flex
-        as="nav"
-        margin="auto"
-        maxWidth="80%"
+        maxWidth="120ch"
+        m="auto"
         p={6}
         justifyContent="space-between"
+        fontSize={'0.8rem'}
       >
-        <Center>CupCakes</Center>
+        <Center
+          fontSize="1.5rem"
+          fontFamily="'Pacifico', cursive"
+          color="accent.teal.300"
+        >
+          <Image src="/assets/logo.png" w="2.5rem" mr="0.5rem" />
+          CupCakes
+        </Center>
         <ConnectButton />
       </Flex>
     </Box>
