@@ -28,11 +28,10 @@ import { CheckIcon, ChevronRightIcon } from '@chakra-ui/icons';
 const ModuleOne = () => {
   return (
     <Stack
-      borderWidth="1px"
-      borderRadius="lg"
+      borderBottomColor={'gray.300'}
+      borderBottomWidth={'1px'}
       direction={{ base: 'column', md: 'row' }}
       bg={useColorModeValue('white', 'gray.900')}
-      boxShadow={'2xl'}
       padding={4}
       marginBottom="40px"
     >
@@ -43,9 +42,9 @@ const ModuleOne = () => {
               <Image w={8} src="https://coindix.com/img/protocols/beefy.svg" />
             </Center>
             <Center ml={3}>
-              <Text>Beefy</Text>
+              <Text>Beefy - </Text>
             </Center>
-            <Flex>
+            <Flex ml={2}>
               <Flex
                 style={{
                   width: 39,
@@ -71,14 +70,16 @@ const ModuleOne = () => {
                   />
                 </Box>
               </Flex>
-              <Text fontSize={'medium'}>xMATIC + MATIC</Text>
+              <Center>
+                <Text fontSize={'medium'}>xMATIC + MATIC</Text>
+              </Center>
             </Flex>
           </Flex>
         </Heading>
         <List spacing={0} fontSize="md">
           <ListItem>
-            <ListIcon as={ChevronRightIcon} color="green.500" />
-            swap USDT to MATIC
+            <Text>Swap</Text>
+            USDT to MATIC
           </ListItem>
           <ListItem>
             <ListIcon as={ChevronRightIcon} color="green.500" />
@@ -102,12 +103,8 @@ const ModuleOne = () => {
           <Button
             flex={1}
             fontSize={'sm'}
-            rounded={'full'}
             bg={'green.400'}
             color={'white'}
-            boxShadow={
-              '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-            }
             _hover={{
               bg: 'green.500',
             }}
@@ -115,7 +112,7 @@ const ModuleOne = () => {
               bg: 'green.500',
             }}
           >
-            Transact
+            Select
           </Button>
         </Stack>
       </Stack>
