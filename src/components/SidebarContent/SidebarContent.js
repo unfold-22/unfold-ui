@@ -5,15 +5,16 @@ const SidebarContent = ({ linkItems, ...rest }) => {
   return (
     <Box
       bg={useColorModeValue('white', 'gray.900')}
+      role="group"
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
-      w={{ base: 'full', md: 60 }}
-      pos="fixed"
-      h="full"
+      w={260}
+      //   pos="fixed"
+      h="300px"
       {...rest}
     >
       {linkItems.map(link => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem path={link.path} key={link.name} icon={link.icon}>
           {link.name}
         </NavItem>
       ))}

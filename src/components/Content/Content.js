@@ -1,18 +1,25 @@
 import { Box, Flex } from '@chakra-ui/react';
 import SidebarContent from '../SidebarContent/SidebarContent';
 import { FiNavigation, FiCodesandbox } from 'react-icons/fi';
+import { Routes, Route } from 'react-router-dom';
+import Paths from '../../pages/Paths';
+import Dapps from '../../pages/Dapps';
 
 const linkItems = [
-  { name: 'Paths', icon: FiNavigation },
-  { name: 'Dapps', icon: FiCodesandbox },
+  { name: 'Paths', icon: FiNavigation, path: '/paths' },
+  { name: 'Dapps', icon: FiCodesandbox, path: '/dapps' },
 ];
 
 const Content = () => {
   return (
     <Flex w="80%" margin={'30px auto'} p={30}>
       <SidebarContent linkItems={linkItems} />
-      <Box w="280px">here</Box>
-      <Box>there</Box>
+      <Box pl={20} flex={1}>
+        <Routes>
+          <Route path="/paths" element={<Paths />} />
+          <Route path="/dapps" element={<Dapps />} />
+        </Routes>
+      </Box>
     </Flex>
   );
 };
