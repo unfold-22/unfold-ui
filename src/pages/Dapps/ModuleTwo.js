@@ -43,7 +43,7 @@ const ModuleTwo = () => {
               <Image w={8} src="https://coindix.com/img/protocols/beefy.svg" />
             </Center>
             <Center ml={3}>
-              <Text>Beefy</Text>
+              <Text>Cryptopunks</Text>
             </Center>
             <Flex>
               <Flex
@@ -71,22 +71,26 @@ const ModuleTwo = () => {
                   />
                 </Box>
               </Flex>
-              <Text fontSize={'medium'}>xMATIC + MATIC</Text>
+              <Text fontSize={'medium'}>Buy NFT</Text>
             </Flex>
           </Flex>
         </Heading>
         <List spacing={0} fontSize="md">
           <ListItem>
             <ListIcon as={ChevronRightIcon} color="green.500" />
-            swap USDT to MATIC
+            swap USDC to MATIC
           </ListItem>
           <ListItem>
             <ListIcon as={ChevronRightIcon} color="green.500" />
-            Wrap half of the MATIC to xMATIC
+            Bridge MATIC to Ethereum Chain
           </ListItem>
           <ListItem>
             <ListIcon as={ChevronRightIcon} color="green.500" />
-            Provide xMATIC and MATIC liquidity
+            Swap MATIC for ETH
+          </ListItem>
+          <ListItem>
+            <ListIcon as={ChevronRightIcon} color="green.500" />
+            Use ETH to buy Cryptopunks
           </ListItem>
           {/* You can also use custom icons from react-icons */}
         </List>
