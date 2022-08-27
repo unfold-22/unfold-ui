@@ -4,7 +4,7 @@ import Header from '../Header/Header';
 
 const Dashboard = () => {
   return (
-    <Box h="100%">
+    <Box h="100vh">
       <Header />
       <Content />
     </Box>
