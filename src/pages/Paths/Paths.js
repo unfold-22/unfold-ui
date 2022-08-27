@@ -89,7 +89,7 @@ const Paths = () => {
         cursor="pointer"
         onClick={() => setShowModules(true)}
       >
-        <Center>+Add Module</Center>
+        <Center>Select ZAP</Center>
       </Box>
       <SelectModule isOpen={showModules} setIsOpen={v => setShowModules(v)} />
       <Button onClick={() => sendUserOperation()}>Test</Button>
