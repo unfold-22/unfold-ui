@@ -22,6 +22,8 @@ import { useEIP4337, useSCWallet } from '../../eip4337/EIP4337';
 import GreeterArtifact from '../../eip4337/abi/Greeter.json';
 import { useSendTransaction, useSigner } from 'wagmi';
 import { useEffect, useMemo, useState } from 'react';
+import SidebarContent from '../../components/SidebarContent/SidebarContent';
+import SelectModule from '../../components/SelectModule';
 
 const GREETER_ADR = '0x932C1dA6feD0Efa30AAA5358F34bEEB3f6281B3b';
 
@@ -72,6 +74,8 @@ const Paths = () => {
           <Text>Select Gas Token</Text>
         </Center>
         <Select w={150} ml={30}>
+          <option>USDT</option>
+          <option>MATIC</option>
           <option>ETH</option>
         </Select>
       </Flex>
