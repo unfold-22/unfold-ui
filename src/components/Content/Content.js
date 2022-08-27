@@ -7,7 +7,7 @@ import Dapps from '../../pages/Dapps';
 
 const linkItems = [
   { name: 'Paths', icon: FiNavigation, path: '/paths' },
-  { name: 'Dapps', icon: FiCodesandbox, path: '/dapps' },
+  { name: 'Modules', icon: FiCodesandbox, path: '/modules' },
 ];
 
 const Content = () => {
