@@ -72,6 +72,8 @@ const Paths = () => {
           <Text>Select Gas Token</Text>
         </Center>
         <Select w={150} ml={30}>
+          <option>USDT</option>
+          <option>MATIC</option>
           <option>ETH</option>
         </Select>
       </Flex>
