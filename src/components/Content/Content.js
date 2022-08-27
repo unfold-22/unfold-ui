@@ -17,7 +17,7 @@ const Content = () => {
       <Box pl={20} flex={1}>
         <Routes>
           <Route path="/paths" element={<Paths />} />
-          <Route path="/dapps" element={<Dapps />} />
+          <Route path="/modules" element={<Dapps />} />
         </Routes>
       </Box>
     </Flex>
