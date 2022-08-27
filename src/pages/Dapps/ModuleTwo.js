@@ -28,11 +28,11 @@ import { CheckIcon, ChevronRightIcon } from '@chakra-ui/icons';
 const ModuleTwo = () => {
   return (
     <Stack
-      borderWidth="1px"
+      borderBottomWidth="1px"
       borderRadius="lg"
       direction={{ base: 'column', md: 'row' }}
       bg={useColorModeValue('white', 'gray.900')}
-      boxShadow={'2xl'}
+      // boxShadow={'2xl'}
       padding={4}
       marginBottom="40px"
     >
@@ -43,7 +43,7 @@ const ModuleTwo = () => {
               <Image w={8} src="https://coindix.com/img/protocols/beefy.svg" />
             </Center>
             <Center ml={3}>
-              <Text>Beefy</Text>
+              <Text>Cryptopunks</Text>
             </Center>
             <Flex>
               <Flex
@@ -57,7 +57,7 @@ const ModuleTwo = () => {
                 <Box style={{ left: 0, position: 'relative' }}>
                   <Image
                     borderRadius={'50%'}
-                    src="https://static.debank.com/image/matic_token/logo_url/matic/6f5a6b6f0732a7a235131bd7804d357c.png"
+                    src="https://www.artnews.com/wp-content/uploads/2021/08/Screen-Shot-2021-08-23-at-4.43.05-PM-e1629755437533.png?w=366"
                     alt=""
                     style={{ width: '20px', height: '20px' }}
                   />
@@ -65,28 +65,32 @@ const ModuleTwo = () => {
                 <Box style={{ left: -3, position: 'relative' }}>
                   <Image
                     borderRadius={'50%'}
-                    src="https://static.debank.com/image/matic_token/logo_url/0xfa68fb4628dff1028cfec22b4162fccd0d45efb6/151d92446b0b2098c7766d4081921ec0.png"
+                    src="https://assets.coingecko.com/coins/images/10760/large/Ulr1CHIGx5Vn0RDTyhrhmi_kWPonxdHFpAoflQmajf-juDNtVl760k1o5qPTiMjplbgZ693Du8P1rdlRAMAmB0-YnPa0h94zm1HCY7mBBLJi0bMNMVlcZqSgKZ2gZEPlMa32HHlQMNtfuUl69DX4KhgGD1mpvSsa1b1_IflHxSWd4BADaP1hHE6BXdLxF1RGxyRmsj5ySBEsegQ.jpg?1583185991"
                     alt=""
                     style={{ width: '20px', height: '20px' }}
                   />
                 </Box>
               </Flex>
-              <Text fontSize={'medium'}>xMATIC + MATIC</Text>
+              <Text fontSize={'medium'}>Buy NFT</Text>
             </Flex>
           </Flex>
         </Heading>
         <List spacing={0} fontSize="md">
           <ListItem>
             <ListIcon as={ChevronRightIcon} color="green.500" />
-            swap USDT to MATIC
+            swap USDC to MATIC
           </ListItem>
           <ListItem>
             <ListIcon as={ChevronRightIcon} color="green.500" />
-            Wrap half of the MATIC to xMATIC
+            Bridge MATIC to Ethereum Chain
           </ListItem>
           <ListItem>
             <ListIcon as={ChevronRightIcon} color="green.500" />
-            Provide xMATIC and MATIC liquidity
+            Swap MATIC for ETH
+          </ListItem>
+          <ListItem>
+            <ListIcon as={ChevronRightIcon} color="green.500" />
+            Use ETH to buy Cryptopunks
           </ListItem>
           {/* You can also use custom icons from react-icons */}
         </List>
@@ -102,12 +106,8 @@ const ModuleTwo = () => {
           <Button
             flex={1}
             fontSize={'sm'}
-            rounded={'full'}
             bg={'green.400'}
             color={'white'}
-            boxShadow={
-              '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-            }
             _hover={{
               bg: 'green.500',
             }}
@@ -115,7 +115,7 @@ const ModuleTwo = () => {
               bg: 'green.500',
             }}
           >
-            Transact
+            Select
           </Button>
         </Stack>
       </Stack>
