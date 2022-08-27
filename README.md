@@ -15,8 +15,8 @@ Cue entry, CupCakes Project.
 
 ## Use case 2
 
-Let's say you want to **invest in Lido Finance on Polygon** but you have **only USDT on Optimism**.
+Let's say you want to **invest in Beefy Finance on Polygon** but you have **only USDT on Optimism**.
 Steps using CupCakes -
 
-1. **Define a path** in CupCakes to `swap USDT to WETH`, `bridge WETH to Polygon`, `Stake half of the WETH` and then provide `stWETH and WETH liquidity` on Lido.
+1. **Define a path** in CupCakes to `swap USDT to WMATIC`, `bridge WMATIC to Polygon`, `Stake half of the WMATIC` and then provide `xMATIC and MATIC liquidity` on Beefy.
 2. **Sign the tx data** for this path and wait as **CupCakes Smart Contract Wallet** executes a **meta tx** and then relays the cross chain part of the tx using [Router CrossTalk SDK](https://www.npmjs.com/package/@routerprotocol/router-crosstalk) and also executes the remaining part of the tx.
