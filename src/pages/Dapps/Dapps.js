@@ -30,10 +30,10 @@ import ModuleTwo from './ModuleTwo';
 
 const Dapps = () => {
   return (
-    <Container marginTop="20px">
+    <Box marginTop="20px">
       <ModuleOne />
       <ModuleTwo />
-    </Container>
+    </Box>
   );
 };
 
