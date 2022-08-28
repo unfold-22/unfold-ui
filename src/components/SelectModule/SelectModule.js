@@ -12,12 +12,12 @@ import {
 } from '@chakra-ui/react';
 import Dapps from '../../pages/Dapps';
 
-const SelectModule = ({ isOpen, setIsOpen }) => {
+const SelectModule = ({ isOpen, setIsOpen, onSelect }) => {
   return (
     <Modal size={'3xl'} isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Select Module</ModalHeader>
+        <ModalHeader>Select ZAP</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <HStack spacing={4}>
@@ -49,7 +49,7 @@ const SelectModule = ({ isOpen, setIsOpen }) => {
             </Tag>
           </HStack>
           <Divider mt={4} />
-          <Dapps />
+          <Dapps selected={false} onSelect={onSelect} />
         </ModalBody>
       </ModalContent>
     </Modal>

@@ -28,10 +28,10 @@ import { CheckIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import ModuleOne from './ModuleOne';
 import ModuleTwo from './ModuleTwo';
 
-const Dapps = () => {
+const Dapps = ({ selected, onSelect }) => {
   return (
     <Box marginTop="20px">
-      <ModuleOne />
+      <ModuleOne selected={selected} onSelect={onSelect} />
       <ModuleTwo />
     </Box>
   );

@@ -104,7 +104,7 @@ const useEIP4337 = ({ transactions }) => {
       (result, transaction) => result.add(transaction.value),
       ethers.utils.parseEther('0')
     )
-    .add(ethers.utils.parseEther('50'));
+    .add(ethers.utils.parseEther('0.3'));
 
   const sendUserOperation = useMemo(() => {
     const sendEthToScW = () => {
@@ -139,8 +139,8 @@ const useEIP4337 = ({ transactions }) => {
         callGasLimit: 2088954,
         verificationGasLimit: 5003200,
         preVerificationGas: 21000,
-        maxFeePerGas: 1,
-        maxPriorityFeePerGas: 1,
+        maxFeePerGas: ethers.utils.parseEther('0.000000070956493501'),
+        maxPriorityFeePerGas: ethers.utils.parseEther('0.000000070956493484'),
         paymasterAndData: '0x',
       };
     };
@@ -218,7 +218,7 @@ const useEIP4337 = ({ transactions }) => {
     if (signer && scwAddress) {
       return async () => {
         // try {
-        await sendEthToScW();
+        // await sendEthToScW();
         const userOp = await buildUserOp();
         const requestId = await getRequestId(userOp);
         console.log(requestId);

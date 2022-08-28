@@ -1,36 +1,13 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Center,
-  Flex,
-  HStack,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  Select,
-  Stat,
-  Switch,
-  Tag,
-  Text,
-} from '@chakra-ui/react';
-import { ethers, utils } from 'ethers';
+import { Box, Button, Center, Flex, Select, Text } from '@chakra-ui/react';
+import { ethers } from 'ethers';
 import { useEIP4337, useSCWallet } from '../../eip4337/EIP4337';
 import GreeterArtifact from '../../eip4337/abi/Greeter.json';
-import { useSendTransaction, useSigner } from 'wagmi';
 import { useEffect, useMemo, useState } from 'react';
-import SidebarContent from '../../components/SidebarContent/SidebarContent';
 import SelectModule from '../../components/SelectModule';
+import { useSigner } from 'wagmi';
+import ModuleOne from '../Dapps/ModuleOne';
 
 const GREETER_ADR = '0x932C1dA6feD0Efa30AAA5358F34bEEB3f6281B3b';
-
-const linkItems = [
-  { name: 'DeFi', path: '/paths' },
-  { name: 'NFTs', path: '/modules' },
-];
 
 const Paths = () => {
   const { data: signer } = useSigner();
@@ -40,21 +17,24 @@ const Paths = () => {
     () => new ethers.Contract(GREETER_ADR, GreeterArtifact.abi, signer),
     [signer]
   );
+  const [selected, setSelected] = useState(false);
 
   const { sendUserOperation } = useEIP4337({
     transactions: [
       {
         to: GREETER_ADR,
-        value: ethers.utils.parseEther('0.1'),
+        value: ethers.utils.parseEther('0.0001'),
         data: Greeter.interface.encodeFunctionData('addGreet', []),
       },
       {
         to: GREETER_ADR,
-        value: ethers.utils.parseEther('0.1'),
+        value: ethers.utils.parseEther('0.0001'),
         data: Greeter.interface.encodeFunctionData('addGreet', []),
       },
     ],
   });
+
+  console.log(ethers.utils.parseEther('0.05'));
 
   useEffect(() => {
     if (signer && scwAddress) {
@@ -66,6 +46,11 @@ const Paths = () => {
       );
     }
   }, [signer, scwAddress, Greeter]);
+
+  const onSelect = () => {
+    setSelected(true);
+    setShowModules(false);
+  };
 
   return (
     <Box>
@@ -79,20 +64,44 @@ const Paths = () => {
           <option>ETH</option>
         </Select>
       </Flex>
-      <Box
-        mt={30}
-        p={4}
-        border="1px"
-        borderColor={'green.700'}
-        borderRadius="8px"
-        borderStyle={'dotted'}
-        cursor="pointer"
-        onClick={() => setShowModules(true)}
-      >
-        <Center>Select ZAP</Center>
-      </Box>
-      <SelectModule isOpen={showModules} setIsOpen={v => setShowModules(v)} />
-      <Button onClick={() => sendUserOperation()}>Test</Button>
+      {selected ? <ModuleOne selected={selected} /> : null}
+      {!selected ? (
+        <Box
+          mt={30}
+          p={4}
+          border="1px"
+          borderColor={'green.700'}
+          borderRadius="8px"
+          borderStyle={'dotted'}
+          cursor="pointer"
+          onClick={() => setShowModules(true)}
+        >
+          <Center>Select ZAP</Center>
+        </Box>
+      ) : null}
+      <SelectModule
+        onSelect={onSelect}
+        isOpen={showModules}
+        setIsOpen={v => setShowModules(v)}
+      />
+      {/* <Button onClick={() => sendUserOperation()}>Test</Button> */}
+      <Center mt={4}>
+        <Button
+          disabled={!selected}
+          flex={1}
+          fontSize={'sm'}
+          bg={'green.400'}
+          color={'white'}
+          _hover={{
+            bg: 'green.500',
+          }}
+          _focus={{
+            bg: 'green.500',
+          }}
+        >
+          Confirm Transactions
+        </Button>
+      </Center>
     </Box>
   );
 };

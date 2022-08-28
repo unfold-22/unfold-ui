@@ -29,11 +29,16 @@ import {
 import { CheckIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { FiArrowRightCircle, FiPlus, FiPlusCircle } from 'react-icons/fi';
 
-const ModuleOne = () => {
+const ModuleOne = ({ selected, onSelect }) => {
   return (
     <Stack
+      onClick={() => !selected && onSelect()}
+      cursor={selected ? undefined : 'pointer'}
+      _hover={{
+        bg: selected ? undefined : '#fdecec',
+      }}
       borderBottomColor={'gray.300'}
-      borderBottomWidth={'1px'}
+      borderBottomWidth={selected ? '0px' : '1px'}
       direction={{ base: 'column', md: 'row' }}
       bg={useColorModeValue('white', 'gray.900')}
       padding={4}
@@ -90,7 +95,7 @@ const ModuleOne = () => {
               pb={3}
               borderRadius={4}
               border={'1px solid'}
-              borderColor={'gray.200'}
+              borderColor={'gray.400'}
             >
               <Flex>
                 <Center>
@@ -106,7 +111,7 @@ const ModuleOne = () => {
               </Flex>
               <Flex mt={3}>
                 <Center mr={6}>
-                  <Tag rounded={'full'} size="lg">
+                  <Tag border={'1px solid gray'} rounded={'full'} size="lg">
                     <Avatar
                       mr={2}
                       w={5}
@@ -120,7 +125,7 @@ const ModuleOne = () => {
                   <FiArrowRightCircle size={20} />
                 </Center>
                 <Center>
-                  <Tag rounded={'full'} size="lg">
+                  <Tag border={'1px solid gray'} rounded={'full'} size="lg">
                     <Avatar
                       mr={2}
                       w={5}
@@ -143,7 +148,7 @@ const ModuleOne = () => {
               pb={3}
               borderRadius={4}
               border={'1px solid'}
-              borderColor={'gray.200'}
+              borderColor={'gray.400'}
             >
               <Flex>
                 <Center>
@@ -154,12 +159,12 @@ const ModuleOne = () => {
                   />
                 </Center>
                 <Center>
-                  <Text fontSize={'xl'}>Invest in strader</Text>
+                  <Text fontSize={'xl'}>Invest half in strader</Text>
                 </Center>
               </Flex>
               <Flex mt={3}>
                 <Center mr={6}>
-                  <Tag rounded={'full'} size="lg">
+                  <Tag border={'1px solid gray'} rounded={'full'} size="lg">
                     <Avatar
                       mr={2}
                       w={5}
@@ -173,7 +178,7 @@ const ModuleOne = () => {
                   <FiArrowRightCircle size={20} />
                 </Center>
                 <Center>
-                  <Tag rounded={'full'} size="lg">
+                  <Tag border={'1px solid gray'} rounded={'full'} size="lg">
                     <Avatar
                       mr={2}
                       w={5}
@@ -196,7 +201,7 @@ const ModuleOne = () => {
               pb={3}
               borderRadius={4}
               border={'1px solid'}
-              borderColor={'gray.200'}
+              borderColor={'gray.400'}
             >
               <Flex>
                 <Center>
@@ -212,7 +217,7 @@ const ModuleOne = () => {
               </Flex>
               <Flex mt={3}>
                 <Center mr={6}>
-                  <Tag rounded={'full'} size="lg">
+                  <Tag border={'1px solid gray'} rounded={'full'} size="lg">
                     <Avatar
                       mr={2}
                       w={5}
@@ -226,7 +231,7 @@ const ModuleOne = () => {
                   <FiPlusCircle size={20} />
                 </Center>
                 <Center>
-                  <Tag rounded={'full'} size="lg">
+                  <Tag border={'1px solid gray'} rounded={'full'} size="lg">
                     <Avatar
                       mr={2}
                       w={5}
@@ -241,29 +246,31 @@ const ModuleOne = () => {
           </Stack>
         </List>
 
-        <Stack
-          width={'100%'}
-          mt={'2rem'}
-          direction={'row'}
-          padding={2}
-          justifyContent={'space-between'}
-          alignItems={'right'}
-        >
-          <Button
-            flex={1}
-            fontSize={'sm'}
-            bg={'green.400'}
-            color={'white'}
-            _hover={{
-              bg: 'green.500',
-            }}
-            _focus={{
-              bg: 'green.500',
-            }}
+        {selected ? null : (
+          <Stack
+            width={'100%'}
+            mt={'2rem'}
+            direction={'row'}
+            padding={2}
+            justifyContent={'space-between'}
+            alignItems={'right'}
           >
-            Select
-          </Button>
-        </Stack>
+            <Button
+              flex={1}
+              fontSize={'sm'}
+              bg={'green.400'}
+              color={'white'}
+              _hover={{
+                bg: 'green.500',
+              }}
+              _focus={{
+                bg: 'green.500',
+              }}
+            >
+              Select
+            </Button>
+          </Stack>
+        )}
       </Stack>
     </Stack>
   );
