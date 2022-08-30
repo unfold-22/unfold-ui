@@ -1,4 +1,12 @@
-import { Box, Button, Center, Flex, Select, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Input,
+  Select,
+  Text,
+} from '@chakra-ui/react';
 import { ethers } from 'ethers';
 import { useEIP4337, useSCWallet } from '../../eip4337/EIP4337';
 import GreeterArtifact from '../../eip4337/abi/Greeter.json';
@@ -85,8 +93,10 @@ const Paths = () => {
         setIsOpen={v => setShowModules(v)}
       />
       {/* <Button onClick={() => sendUserOperation()}>Test</Button> */}
+      {selected ? <Input placeholder="Enter USDT value" /> : null}
       <Center mt={4}>
         <Button
+          onClick={() => sendUserOperation()}
           disabled={!selected}
           flex={1}
           fontSize={'sm'}

@@ -27,7 +27,14 @@ const hardhatChain = {
 };
 
 const { chains, provider } = configureChains(
-  [hardhatChain, chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
+  [
+    hardhatChain,
+    chain.polygonMumbai,
+    chain.mainnet,
+    chain.polygon,
+    chain.optimism,
+    chain.arbitrum,
+  ],
   [publicProvider()]
 );
 

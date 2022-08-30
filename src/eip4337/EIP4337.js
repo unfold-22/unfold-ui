@@ -226,7 +226,7 @@ const useEIP4337 = ({ transactions }) => {
           ethers.utils.arrayify(requestId)
         );
         console.log(userOp);
-        const resp = await axios.post('http://127.0.0.1:9080/rpc', {
+        const resp = await axios.post('/rpc', {
           method: 'eth_sendUserOperation',
           params: [userOp, ENTRY_POINT_ADDR],
           jsonrpc: '2.0',
