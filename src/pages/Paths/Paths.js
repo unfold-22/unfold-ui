@@ -54,7 +54,7 @@ const Paths = () => {
         chainId: 137,
       },
     ],
-    paymasterConnector: paymasterConnector(API_KEY_PAYMASTER),
+    // paymasterConnector: paymasterConnector(API_KEY_PAYMASTER),
     askPrefund: true,
   });
 
