@@ -8,14 +8,20 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { ethers } from 'ethers';
-import { useEIP4337, useSCWallet } from '../../eip4337/EIP4337';
+import {
+  useEIP4337,
+  useSCWallet,
+  paymasterConnector,
+} from '../../eip4337/EIP4337';
 import GreeterArtifact from '../../eip4337/abi/Greeter.json';
 import { useEffect, useMemo, useState } from 'react';
 import SelectModule from '../../components/SelectModule';
 import { useSigner } from 'wagmi';
 import ModuleOne from '../Dapps/ModuleOne';
+import axios from 'axios';
 
 const GREETER_ADR = '0x932C1dA6feD0Efa30AAA5358F34bEEB3f6281B3b';
+const API_KEY_PAYMASTER = 'asdf90D0Efa30AAA5358F34bEEB3f6281B3b';
 
 const Paths = () => {
   const { data: signer } = useSigner();
@@ -27,25 +33,34 @@ const Paths = () => {
   );
   const [selected, setSelected] = useState(false);
 
-  const { sendUserOperation } = useEIP4337({
+  // 0.0014 ->  0.0017
+  const { sendUserOperation, status } = useEIP4337({
     transactions: [
+      //   {
+      //     to: '0xfF23A09696522cAc320f076a164159b2568B046C',
+      //     value: ethers.utils.parseEther('0.0001'), //0.38701101891151056
+      //     data: '0x',
+      //   },
       {
         to: GREETER_ADR,
-        value: ethers.utils.parseEther('0.0001'),
+        value: ethers.utils.parseEther('0.0002'),
         data: Greeter.interface.encodeFunctionData('addGreet', []),
+        chainId: 1,
       },
       {
         to: GREETER_ADR,
         value: ethers.utils.parseEther('0.0001'),
         data: Greeter.interface.encodeFunctionData('addGreet', []),
+        chainId: 137,
       },
     ],
+    paymasterConnector: paymasterConnector(API_KEY_PAYMASTER),
+    askPrefund: true,
   });
-
-  console.log(ethers.utils.parseEther('0.05'));
 
   useEffect(() => {
     if (signer && scwAddress) {
+      console.log(scwAddress);
       Greeter.getGreetCount(scwAddress).then(resp =>
         console.log('greetcount', resp)
       );
@@ -96,8 +111,10 @@ const Paths = () => {
       {selected ? <Input placeholder="Enter USDT value" /> : null}
       <Center mt={4}>
         <Button
+          loadingText="Processing Transaction"
+          isLoading={status && status !== 'sent'}
           onClick={() => sendUserOperation()}
-          disabled={!selected}
+          disabled={!selected || (status && status !== 'sent')}
           flex={1}
           fontSize={'sm'}
           bg={'green.400'}

@@ -29,7 +29,8 @@ import axios from 'axios';
 // Get sign from MM for SCW
 // Send the userOp to bundler
 
-axios.defaults.baseURL = 'https://localhost:8080';
+// axios.defaults.baseURL = 'https://eip433-bundler-testnet.protonapp.io/';
+axios.defaults.baseURL = 'http://localhost:9080';
 const ENTRY_POINT_ADDR = '0x8ADd98477E39569e15d807482FFDA67aAd347207';
 const CREATE_2_FACTORY_ADDR = '0xbCEfC055Cd796452247023e561e062e1e0A628F4';
 
@@ -79,7 +80,6 @@ const useSCWallet = () => {
             signer
           );
           const nonce = await Wallet.nonce();
-          console.log(nonce);
           setNounce(nonce);
         }
       });
@@ -92,11 +92,15 @@ const useSCWallet = () => {
 /**
  * transactions - [{to, value, chainId, data}]
  */
-const useEIP4337 = ({ transactions }) => {
+const useEIP4337 = ({
+  paymasterConnector,
+  transactions,
+  askPrefund = false,
+}) => {
   const { data: signer } = useSigner();
   const { scwAddress, initCode, nounce } = useSCWallet();
 
-  const [data, setData] = useState(null);
+  const [status, setStatus] = useState(null);
   const [error, setError] = useState(null);
 
   const totalValue = transactions
@@ -104,7 +108,7 @@ const useEIP4337 = ({ transactions }) => {
       (result, transaction) => result.add(transaction.value),
       ethers.utils.parseEther('0')
     )
-    .add(ethers.utils.parseEther('0.3'));
+    .add(ethers.utils.parseEther('0.5'));
 
   const sendUserOperation = useMemo(() => {
     const sendEthToScW = () => {
@@ -131,7 +135,7 @@ const useEIP4337 = ({ transactions }) => {
         txdatas,
       ]);
 
-      return {
+      const userOp = {
         sender: scwAddress,
         nonce: nounce, // need to get nounce
         initCode: initCode,
@@ -143,6 +147,13 @@ const useEIP4337 = ({ transactions }) => {
         maxPriorityFeePerGas: ethers.utils.parseEther('0.000000070956493484'),
         paymasterAndData: '0x',
       };
+
+      userOp.paymasterAndData =
+        paymasterConnector && (await paymasterConnector(userOp));
+      userOp.paymasterAndData = userOp.paymasterAndData || '0x';
+      console.log(userOp);
+
+      return userOp;
     };
 
     const getRequestId = async userOp => {
@@ -218,20 +229,23 @@ const useEIP4337 = ({ transactions }) => {
     if (signer && scwAddress) {
       return async () => {
         // try {
-        // await sendEthToScW();
+        setStatus('transfering');
+        askPrefund && (await sendEthToScW());
         const userOp = await buildUserOp();
         const requestId = await getRequestId(userOp);
         console.log(requestId);
+        setStatus('signing');
         userOp.signature = await signer.signMessage(
           ethers.utils.arrayify(requestId)
         );
-        console.log(userOp);
+        console.log(userOp.signature);
         const resp = await axios.post('/rpc', {
           method: 'eth_sendUserOperation',
           params: [userOp, ENTRY_POINT_ADDR],
           jsonrpc: '2.0',
           id: 42,
         });
+        setStatus('sent');
         console.log(resp.data);
         // } catch (e) {
         //   setError(e);
@@ -241,7 +255,16 @@ const useEIP4337 = ({ transactions }) => {
     return undefined;
   }, [signer, scwAddress, initCode, nounce, totalValue, transactions]);
 
-  return { data, error, sendUserOperation };
+  return { status, error, sendUserOperation };
 };
 
-export { useEIP4337, useSCWallet };
+const paymasterConnector = api_key => async userOp => {
+  const result = await axios.post('http://localhost:8080/signPaymaster', {
+    api_key,
+    userOp,
+  });
+
+  return result.data.paymasterAndData;
+};
+
+export { useEIP4337, useSCWallet, paymasterConnector };
